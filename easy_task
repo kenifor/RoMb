@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#set the number of chairs
+echo -n "number of chairs -> "
+read -a nums
+
+#chair of the last patient
+echo "chair of the last patient ->" $((nums - 1))
+exit 0
+         
