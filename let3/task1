@@ -1,0 +1,30 @@
+#!/bin/bash
+
+echo "enter first row:"
+read -a row1
+echo "enter second row:"
+read -a row2
+declare -A symb
+#обрабатываем 1 строку
+
+for ((i=0;i<${#row1};i++)); do
+        if [[ ${symb[${row1:$i:1}]} -eq "0" ]]; then
+                symb[${row1:$i:1}]=1
+        fi
+done
+#обрабатываем 2 строку
+
+for ((i=0;i<${#row2};i++)); do
+        if [[ ${symb[${row2:$i:1}]} -eq "0" ]]; then
+                symb[${row2:$i:1}]=1
+        fi
+done
+#обрабатываем и выводим 3 строку
+row3=""
+for key in "${!symb[@]}"; do
+        if [[ ${symb[$key]} = "1" ]]; then
+                row3+=$key
+        fi
+done
+echo $row3 | rev
+exit 0
