@@ -1,0 +1,34 @@
+#!/bin/bash
+
+echo "Enter your string: "
+read -a string
+
+for ((i=1 ; i < "${#string[@]}"; ++i)) {
+        lenCurent=${#string[i]}                 #Длина текущего слова
+        lenPrevious=${#string[$i - 1]}          #Длина предыдущего слова
+        if [[ $(($i % 2)) == "1" ]]; then       #Замена слов
+                if [[ "$lenCurent" < "$lenPrevious" ]]; then
+                        tmp="${string[$i]}"
+                        string[$i]="${string[$i - 1]}"
+                        string[$i - 1]=$tmp
+                fi
+        else
+if [[ "$lenCurent" > "$lenPrevious" ]]; then
+        tmp="${string[$i]}"
+        string[$i]="${string[$i - 1]}"
+        string[$i - 1]=$tmp
+        fi
+fi
+
+}
+#цикл на изменение высоту буквы
+for ((i=0; i < "${#string[@]}"; ++i)) {
+tmp=${string[$i]}
+        if [[ $(($i % 2)) == "1" ]]; then
+                str=$(echo "$tmp" | tr '[:lower:]' '[:upper:]')
+                string[$i]=$str
+        fi
+}
+
+echo "${string[@]}"
+exit 0
