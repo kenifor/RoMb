@@ -1,0 +1,25 @@
+#!/bin/bash
+
+echo "enter words pls"
+read -a string
+
+length=${#string[@]}
+sum=0
+if [[ $length -eq 0 ]]; then # in case when havent got a letter
+        echo "no words, result: z" 
+        exit 0
+        else
+for ((i=0;i<length;i++)); do
+        ascNum=$(($(echo -n ${string[$i]} | od -An -tuC)-96)) # calculate only lower case       
+        sum=$(( $sum + $ascNum ))
+        done
+
+if [[ $(( $sum % 26 )) = 0 ]]; then
+        sum=z
+        else
+                sum=$(( $(( $sum % 26 )) + 96 ))
+fi
+echo $(printf "result: \x$(printf %x $sum)")
+fi
+
+exit 0
