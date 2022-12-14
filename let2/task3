@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 #вводим фразу 
 echo -n "Enter your text: "
